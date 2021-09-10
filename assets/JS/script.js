@@ -6,6 +6,7 @@ const searchBtn = document.getElementById("searchBtn")
 const currentFore = document.getElementById("current-forecast");
 
 const conditionsEl = document.getElementById("conditions")
+const fiveDayEl = document.getElementById("forecast");
 
 function getDailyWeather(city) {
     let apiKey = "&appid=f61e4700116459fd4c0d7558aa5d0ec1"
@@ -25,7 +26,7 @@ function getDailyWeather(city) {
 
 function getFiveDay(city) {
     let apiKey = "&appid=f61e4700116459fd4c0d7558aa5d0ec1"
-    let fiveDayFore = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&cnt=1" + "&units=imperial" + apiKey
+    let fiveDayFore = "https://api.openweathermap.org/data/2.5/forecast/?q=" + city + "&cnt=10" + "&units=imperial" + apiKey
     console.log(fiveDayFore);
     fetch(fiveDayFore).then((response) => { 
         if (response.ok) {
@@ -68,8 +69,20 @@ function displayWeather(data) {
 }
 
 function displayFiveDay (data) {
-    let date = new Date(data.list[0].dt_txt,).toLocaleDateString();
-    console.log(date);
+console.log(data.list.length);
+    for (var i=0; i< data.list.length; i++) {
+    let date = new Date(data.list[i].dt_txt,).toLocaleDateString();
+
+    let forecastEl = document.createElement("div")
+    forecastEl.setAttribute("class","col")
+    forecastEl.innerHTML = date;
+
+    fiveDayEl.appendChild(forecastEl);
+    
+
+
+
+    }
 }
 function formSubmit (e) {
     let city = searchEl.value.split(' ').join('+');
