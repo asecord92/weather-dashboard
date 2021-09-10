@@ -39,13 +39,13 @@ function getFiveDay(city) {
 
 
 }
-function displayWeather(data, city ) {
+function displayWeather(data) {
     let today = new Date().toLocaleDateString();
     
     //figure out icon thing
 
     let location = document.createElement("h3");
-    location.innerHTML = city.split("+").join(" ") + " " + today 
+    location.innerHTML = data.name+ " " + today 
     let temp = document.createElement("li");
     temp.setAttribute("class","list-group-item");
     temp.innerHTML = "Temp: " + data.main.temp + "&#176; F"
@@ -68,7 +68,7 @@ function displayWeather(data, city ) {
 }
 
 function displayFiveDay (data) {
-    let date = new Date(data.list[0].dt_txt).toDateString("en-US");
+    let date = new Date(data.list[0].dt_txt,).toLocaleDateString();
     console.log(date);
 }
 function formSubmit (e) {
