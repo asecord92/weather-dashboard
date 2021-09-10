@@ -28,5 +28,11 @@ header {
     border: lightgray solid 1px;
 }
 .btn-primary {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom:10px;
+}
+
+span {
+    color: red;
+    font-style: italic;
 }
