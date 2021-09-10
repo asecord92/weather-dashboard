@@ -1,0 +1,32 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1;
+    font-size: 16px;
+}
+
+header {
+    background-color: #2a2a72;
+    background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+    color: white;
+    position: relative;
+    text-align: center;
+    font-weight: bolder;
+    width: 100%;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    
+}
+
+.current-forecast {
+    border: lightgray solid 1px;
+}
+.btn-primary {
+    margin-top: 10px;
+}
