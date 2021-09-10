@@ -23,7 +23,20 @@ function getDailyWeather(city) {
 
 }
 
-function getFiveDay() {
+function getFiveDay(city) {
+    let apiKey = "&appid=f61e4700116459fd4c0d7558aa5d0ec1"
+    let fiveDayFore = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&cnt=1" + "&units=imperial" + apiKey
+    console.log(fiveDayFore);
+    fetch(fiveDayFore).then((response) => { 
+        if (response.ok) {
+            response.json().then((data)=>{
+                displayFiveDay(data);
+
+            });
+        };
+    });
+
+
 
 }
 function displayWeather(data, city ) {
@@ -52,6 +65,11 @@ function displayWeather(data, city ) {
     conditionsEl.appendChild(temp);
     conditionsEl.appendChild(wind);
     conditionsEl.appendChild(humid);
+}
+
+function displayFiveDay (data) {
+    let date = new Date(data.list[0].dt_txt).toDateString("en-US");
+    console.log(date);
 }
 function formSubmit (e) {
     let city = searchEl.value.split(' ').join('+');
