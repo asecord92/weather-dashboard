@@ -13,7 +13,7 @@ The purpose of this application is to use OpenWeather API in order to search the
 
 Below is a screenshot of the application: 
 
-![ScreenShot] (./assets/images/weather-screen.png)
+![ScreenShot](./assets/images/weather-screen.png)
 
 
 Link to application: https://asecord92.github.io/weather-dashboard/
