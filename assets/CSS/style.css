@@ -32,7 +32,7 @@ header {
     margin-bottom:10px;
 }
 
-span {
-    color: red;
-    font-style: italic;
+.five {
+    font-size: 12px;
+    line-height: 1.5;
 }

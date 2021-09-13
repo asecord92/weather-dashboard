@@ -7,6 +7,7 @@ const currentFore = document.getElementById("current-forecast");
 
 const conditionsEl = document.getElementById("conditions")
 const fiveDayEl = document.getElementById("forecast");
+const recentSearEl = document.getElementById("recent-search");
 
 function getDailyWeather(city) {
     let apiKey = "&appid=f61e4700116459fd4c0d7558aa5d0ec1"
@@ -26,7 +27,7 @@ function getDailyWeather(city) {
 
 function getFiveDay(city) {
     let apiKey = "&appid=f61e4700116459fd4c0d7558aa5d0ec1"
-    let fiveDayFore = "https://api.openweathermap.org/data/2.5/forecast/?q=" + city + "&cnt=10" + "&units=imperial" + apiKey
+    let fiveDayFore = "https://api.openweathermap.org/data/2.5/forecast/?q=" + city + "&units=imperial" + apiKey
     console.log(fiveDayFore);
     fetch(fiveDayFore).then((response) => { 
         if (response.ok) {
@@ -62,28 +63,38 @@ function displayWeather(data) {
     let uvIn =  document.createElement("li");
     uvIn.setAttribute("class","list-group-item");
 
-    currentFore.prepend(location);
+    conditionsEl.prepend(location);
     conditionsEl.appendChild(temp);
     conditionsEl.appendChild(wind);
     conditionsEl.appendChild(humid);
+
+    recentSearch(data);
 }
 
 function displayFiveDay (data) {
-console.log(data.list.length);
+    data.length = []
     for (var i=0; i< data.list.length; i++) {
-    let date = new Date(data.list[i].dt_txt,).toLocaleDateString();
-
+    let date = data.list[i].dt_txt.split(" ")
+    if (date[1] === "15:00:00"){
     let forecastEl = document.createElement("div")
-    forecastEl.setAttribute("class","col")
-    forecastEl.innerHTML = date;
+    forecastEl.setAttribute("class","col five")
+    forecastEl.innerHTML = date[0] +"<br> Temp: " + data.list[i].main.temp + "&#176; F <br> Wind: " + data.list[i].wind.speed + " MPH <br> Humidity: " + data.list[i].main.humidity + " &#37;";
 
     fiveDayEl.appendChild(forecastEl);
-    
-
-
-
+    }
     }
 }
+
+function recentSearch (data) {
+    let recentCity = document.createElement("button");
+    recentCity.setAttribute("type", "button");
+    recentCity.setAttribute("class", "list-group-item list-group-item-action");
+    recentCity.innerText = data.name
+    recentSearEl.appendChild(recentCity);
+
+}
+
+
 function formSubmit (e) {
     let city = searchEl.value.split(' ').join('+');
     console.log(city);
@@ -98,4 +109,7 @@ function formSubmit (e) {
 
 searchBtn.addEventListener("click",(e) => {
     formSubmit(e);
+    conditionsEl.innerText = "";
+    fiveDayEl.innerText = "";
+    
 })
